@@ -1,6 +1,6 @@
 # liri-node-app
 
-<!-- https://jamie705.github.io/liri-node-app/ -->
+https://mafner.github.io/liri-node-app/
 
 
 Search Spotify for songs, Bands in town for concerts and OMBD for movies. Have Fun.
