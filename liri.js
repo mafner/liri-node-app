@@ -15,7 +15,7 @@ moment().format();
 var spotify = new Spotify(keys.spotify);
 
 //Node user commands to capture for searches: 
-var searchOption = process.argv[2]; 
+var searchType = process.argv[2]; 
 var searchParameter = process.argv[3];
 
 // CONCERT-THIS
@@ -45,14 +45,48 @@ function showConcertInfo(searchParameter){
 });}
 
 // SPOTIFY-THIS-SONG:
+function showSongInfo(searchParameter) {
+    if (searchParameter === undefined || null) {
+        searchParameter = '"The Sign" -Ace of Base'; //default Song
+    }
+    spotify.search(
+        {
+            type: "track",
+            query: searchParameter
+        },
+        function (err, data) {
+            if (err) {
+                console.log("Error occurred: " + err);
+                return;
+            }
+            var songs = data.tracks.items;
 
+            for (var i = 0; i < songs.length; i++) {
+                console.log("*---------SONG INFO---------*");
+                fs.appendFileSync("log.txt", "*---------SONG INFO---------*\n");
+                console.log(i);
+                fs.appendFileSync("log.txt", i +"\n");
+                console.log("Song name: " + songs[i].name);
+                fs.appendFileSync("log.txt", "song name: " + songs[i].name +"\n");
+                console.log("Preview song: " + songs[i].preview_url);
+                fs.appendFileSync("log.txt", "preview song: " + songs[i].preview_url +"\n");
+                console.log("Album: " + songs[i].album.name);
+                fs.appendFileSync("log.txt", "album: " + songs[i].album.name + "\n");
+                console.log("Artist(s): " + songs[i].artists[0].name);
+                fs.appendFileSync("log.txt", "artist(s): " + songs[i].artists[0].name + "\n");
+                console.log("*------------------------*");  
+                fs.appendFileSync("log.txt", "*------------------------*\n");
+             }
+        }
+    );
+};
 
 // MOVIE-THIS:
 
 
 //Switch Functions (for each search parameter):
-function UserInputs (searchOption, searchParameter){
-    switch (searchOption) {
+function UserInputs (searchType, searchParameter){
+    switch (searchType) {
     case 'concert-this':
         showConcertInfo(searchParameter);
         break;
@@ -70,4 +104,4 @@ function UserInputs (searchOption, searchParameter){
     }
 };
 
-UserInputs(searchOption, searchParameter);
+UserInputs(searchType, searchParameter);
