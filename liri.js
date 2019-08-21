@@ -107,8 +107,6 @@ function showMovieInfo(searchParameter){
         fs.appendFileSync("log.txt", "Release Year: " + movies.Year + "\n");
         console.log("IMDB Rating: " + movies.imdbRating);
         fs.appendFileSync("log.txt", "IMDB Rating: " + movies.imdbRating + "\n");
-        console.log("Rotten Tomatoes Rating: " + getRottenTomatoesRatingValue(movies));
-        fs.appendFileSync("log.txt", "Rotten Tomatoes Rating: " + getRottenTomatoesRatingValue(movies) + "\n");
         console.log("Country of Production: " + movies.Country);
         fs.appendFileSync("log.txt", "Country of Production: " + movies.Country + "\n");
         console.log("Language: " + movies.Language);
